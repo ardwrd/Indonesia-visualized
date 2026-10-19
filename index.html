@@ -4,48 +4,36 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f8fa">
-  <meta name="description" content="Jelajahi data statistik Indonesia dari BPS melalui peta 38 provinsi yang interaktif dan mudah dibaca.">
+  <meta name="description" content="Peta interaktif statistik BPS: kependudukan, ekonomi, ketenagakerjaan, pendidikan, kesehatan, IPM, dan kemiskinan di 38 provinsi.">
   <meta property="og:title" content="Indonesia Visualized — Jelajahi Indonesia lewat data">
-  <meta property="og:description" content="Peta interaktif statistik BPS di 38 provinsi Indonesia.">
+  <meta property="og:description" content="Eksplorasi statistik publik Indonesia dengan peta interaktif dan tabel perbandingan provinsi.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=2">
-  <title>Indonesia Visualized — Data Indonesia dalam peta</title>
+  <link rel="stylesheet" href="styles.css?v=3">
+  <title>Indonesia Visualized — Jelajahi Indonesia lewat data</title>
 </head>
 <body>
   <a class="skip-link" href="#main">Langsung ke konten</a>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="./" aria-label="Indonesia Visualized — beranda">indonesia<span>visualized</span><b>.</b></a>
-      <nav class="header-nav" aria-label="Navigasi utama"><a href="#peringkat">Data provinsi</a><a href="#tentang">Tentang</a><a class="github-link" href="https://github.com/ardwrd/Indonesia-visualized" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></nav>
-    </div>
-  </header>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="./" aria-label="Indonesia Visualized — beranda">indonesia<span>visualized</span><b>.</b></a>
+    <nav class="header-nav" aria-label="Navigasi utama"><a href="#peringkat">Data provinsi</a><a href="#tentang">Tentang</a><a class="github-link" href="https://github.com/ardwrd/Indonesia-visualized" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+  </div></header>
 
-  <main class="container" id="main">
-    <div class="intro">
-      <div class="eyebrow"><span aria-hidden="true" class="eyebrow-rule"></span> DATA PUBLIK INDONESIA</div>
-      <h1>Indonesia, dalam data.</h1>
-      <p>Eksplorasi kondisi sosial Indonesia melalui peta. Pilih indikator, lalu ketuk provinsi untuk melihat angkanya.</p>
-    </div>
+  <main id="main" class="container">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="eyebrow">DATA PUBLIK INDONESIA</div>
+      <h1 id="page-title">Indonesia, dalam data.</h1>
+      <p>Pilih kategori, indikator, dan tahun. Ketuk provinsi untuk membaca statistiknya.</p>
+    </section>
 
     <section class="explorer" aria-label="Peta statistik Indonesia">
       <div class="explorer-toolbar">
-        <div class="indicator-control">
-          <label for="indicator">Pilih indikator</label>
-          <select id="indicator">
-            <option value="poverty_rate">Persentase penduduk miskin</option>
-            <option value="poor_population_thousand">Jumlah penduduk miskin</option>
-            <option value="poverty_gap">Indeks kedalaman kemiskinan (P1)</option>
-            <option value="poverty_severity">Indeks keparahan kemiskinan (P2)</option>
-            <option value="poverty_line">Garis kemiskinan</option>
-          </select>
-        </div>
-        <div class="dataset-meta">38 provinsi <span aria-hidden="true">·</span> Maret 2025</div>
+        <div class="selector"><label for="category">Kategori</label><select id="category" aria-label="Kategori statistik"><option value="">Memuat…</option></select></div>
+        <div class="selector selector-metric"><label for="indicator">Indikator</label><select id="indicator" aria-label="Indikator statistik"><option value="">Memuat…</option></select></div>
+        <div class="selector selector-year"><label for="year">Tahun</label><select id="year" aria-label="Tahun data"><option value="2025">2025</option></select></div>
       </div>
-
       <div class="visualization">
         <div class="map-section">
-          <div class="map-heading">
-            <div><h2 id="map-title">Persentase penduduk miskin</h2><p>Klik atau sentuh provinsi untuk melihat detail</p></div>
+          <div class="map-heading"><div><h2 id="map-title">Memuat indikator…</h2><p id="map-subtitle">38 provinsi • Data BPS</p></div>
             <div class="map-controls" aria-label="Navigasi peta">
               <button id="zoom-out" type="button" aria-label="Perkecil peta" title="Perkecil peta">−</button>
               <button id="zoom-in" type="button" aria-label="Perbesar peta" title="Perbesar peta">+</button>
@@ -53,32 +41,37 @@
             </div>
           </div>
           <div class="map-canvas" id="map-holder">
-            <div id="map-status" class="map-status" role="status">Memuat peta Indonesia…</div>
+            <div class="map-status" id="map-status" role="status">Memuat peta Indonesia…</div>
             <svg id="map-svg" viewBox="0 0 1000 445" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Peta Indonesia berisi 38 provinsi. Pilih provinsi untuk melihat statistik."><g id="map-geometry"></g></svg>
             <div class="tooltip" id="tooltip" hidden></div>
           </div>
           <div class="map-legend"><span id="legend-low">Rendah</span><span class="legend-scale" role="img" aria-label="Skala warna dari nilai rendah ke nilai tinggi"></span><span id="legend-high">Tinggi</span></div>
-          <div class="mobile-province"><label for="province-select">Atau pilih provinsi</label><select id="province-select"><option value="">Pilih provinsi…</option></select></div>
+          <div class="mobile-province"><label for="province-select">Pilih provinsi</label><select id="province-select"><option value="">Pilih provinsi…</option></select></div>
         </div>
-        <aside class="detail-section" aria-label="Detail statistik provinsi">
-          <div class="detail-head"><span>Detail wilayah</span><span id="detail-date">Maret 2025</span></div>
-          <div id="detail-empty" class="detail-empty"><h3>Pilih provinsi</h3><p>Sentuh wilayah pada peta atau pilih provinsi dari daftar untuk melihat nilai statistiknya.</p></div>
+        <aside class="detail-section" aria-label="Detail provinsi">
+          <div class="detail-head"><span>Detail wilayah</span><span id="detail-date">2025</span></div>
+          <div id="detail-empty" class="detail-empty"><h3>Pilih provinsi</h3><p>Sentuh wilayah pada peta atau pilih provinsi dari daftar.</p></div>
           <div id="detail-filled" class="detail-filled" hidden><h3 id="detail-heading">—</h3><div class="detail-number" id="selected-value">—</div><div class="detail-unit" id="selected-unit"></div><p id="selected-foot" class="detail-rank"></p><p id="detail-desc" class="detail-desc"></p></div>
           <div class="detail-summary"><div class="summary-item"><span>Nilai tertinggi</span><strong id="stat-max">—</strong><small id="stat-max-name">—</small></div><div class="summary-item"><span>Nilai terendah</span><strong id="stat-min">—</strong><small id="stat-min-name">—</small></div></div>
-          <p class="median">Median 38 provinsi: <strong id="stat-median">—</strong> <span>(bukan nilai nasional)</span></p>
+          <p class="median">Median provinsi: <strong id="stat-median">—</strong> <span>· bukan nilai nasional</span></p>
         </aside>
       </div>
     </section>
 
-    <section class="ranking-section" id="peringkat" aria-labelledby="rank-title">
-      <div class="ranking-header"><div><h2 id="rank-title">Perbandingan provinsi</h2><p>Diurutkan dari nilai tertinggi pada indikator yang dipilih.</p></div><div class="ranking-actions"><label class="sr-only" for="search">Cari provinsi</label><input type="search" id="search" placeholder="Cari provinsi…" autocomplete="off"><button id="download-csv" type="button">Unduh CSV <span aria-hidden="true">↓</span></button></div></div>
-      <div class="rank-table"><div class="rank-label"><span>Provinsi</span><span id="table-indicator">Persentase miskin</span></div><div id="ranking-list" aria-live="polite"></div></div>
-      <p class="rank-note" id="metric-explanation">Persentase penduduk miskin adalah proporsi penduduk yang pengeluaran per kapitanya di bawah garis kemiskinan.</p>
+    <section id="peringkat" class="ranking-section" aria-labelledby="rank-title">
+      <div class="ranking-header"><div><h2 id="rank-title">Perbandingan provinsi</h2><p>Diurutkan menurut nilai indikator, tertinggi lebih dulu.</p></div>
+      <div class="ranking-actions"><label class="sr-only" for="search">Cari provinsi</label><input id="search" type="search" placeholder="Cari provinsi…" autocomplete="off"><button type="button" id="download-csv">Unduh CSV ↓</button></div></div>
+      <div class="rank-table"><div class="rank-label"><span>Provinsi</span><span id="table-indicator">Nilai</span></div><div id="ranking-list" aria-live="polite"></div></div>
+      <p class="rank-note" id="metric-explanation"></p>
     </section>
 
-    <section class="about" id="tentang" aria-labelledby="about-title"><h2 id="about-title">Tentang data</h2><div><p>Indonesia Visualized merupakan proyek independen, bukan situs resmi BPS. Versi ini menyajikan data kemiskinan BPS periode Maret 2025 yang dipublikasikan ulang melalui Pusdatin Kementerian Pertanian. Indikator dari periode berbeda tidak boleh dibandingkan tanpa memeriksa metode dan cakupannya.</p><p>Sumber: <a id="original-source" href="https://www.bps.go.id/" target="_blank" rel="noopener noreferrer">Tabel indikator BPS / Pusdatin Kementan ↗</a> · <a href="https://github.com/denyherianto/indonesia-geojson-topojson-maps-with-38-provinces" target="_blank" rel="noopener noreferrer">Peta 38 provinsi (CC BY 4.0) ↗</a></p></div></section>
+    <section class="about" id="tentang" aria-labelledby="about-title"><h2 id="about-title">Tentang data</h2><div>
+      <p>Indonesia Visualized adalah proyek independen, bukan situs resmi BPS. Setiap indikator mempunyai definisi, satuan, dan periode sendiri. Tidak semua seri tersedia pada setiap tahun. Data ditampilkan sesuai ketersediaan snapshot yang telah diverifikasi, bukan data langsung secara real-time.</p>
+      <p id="source-notes"></p>
+      <p><a id="original-source" href="https://www.bps.go.id/" target="_blank" rel="noopener noreferrer">Lihat tabel data asli BPS ↗</a> · <a href="https://github.com/denyherianto/indonesia-geojson-topojson-maps-with-38-provinces" target="_blank" rel="noopener noreferrer">Sumber geometri peta (CC BY 4.0) ↗</a></p>
+    </div></section>
   </main>
-  <footer class="site-footer"><div class="container">Indonesia Visualized <span>·</span> Proyek data publik independen <a href="https://github.com/ardwrd/Indonesia-visualized" target="_blank" rel="noopener noreferrer">Kode sumber ↗</a></div></footer>
-  <script defer src="app.js?v=2"></script>
+  <footer class="site-footer"><div class="container">Indonesia Visualized <span>·</span> Eksplorasi data publik <a href="https://github.com/ardwrd/Indonesia-visualized" target="_blank" rel="noopener noreferrer">Kode sumber ↗</a></div></footer>
+  <script defer src="app.js?v=3"></script>
 </body>
 </html>
