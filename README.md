@@ -1,69 +1,63 @@
 # Indonesia Visualized
 
-Visualisasi interaktif data statistik publik Indonesia. **Situs independen, bukan layanan resmi BPS.**
+Eksplorasi statistik **38 provinsi** Indonesia secara interaktif dari sumber data BPS. Website statis, tanpa backend, tracker, atau API key; siap GitHub Pages.
 
-**GitHub Pages:** https://ardwrd.github.io/Indonesia-visualized/
+## Cakupan data
 
-## Versi pertama: kemiskinan Maret 2025
+7 kategori dan 16 indikator (5 kemiskinan lama + 11 indikator baru):
 
-- Peta interaktif **38 provinsi**, bisa diklik/sentuh untuk menampilkan data wilayah, zoom in/out/reset, dan pan saat zoom.
-- Lima indikator: persentase penduduk miskin (P0), jumlah penduduk miskin (ribu jiwa), indeks kedalaman (P1), indeks keparahan (P2), dan garis kemiskinan (Rp/kapita/bulan).
-- Detail nilai dan peringkat provinsi, maksimum/minimum, median antarprovinsi, daftar peringkat, pencarian, dan ekspor CSV.
-- Mobile-first: peta tetap muat dalam layar HP, tersedia dropdown provinsi sebagai alternatif untuk pulau/provinsi kecil.
-- **Vanilla HTML/CSS/JavaScript tanpa framework, D3, Web API key, Google Fonts, analytics, atau backend.** Data dan GeoJSON di-host langsung dalam repo supaya render tidak bergantung pada CDN.
+| Kategori | Indikator | Periode snapshot |
+|---|---|---|
+| Kependudukan | Jumlah penduduk (proyeksi, ribu jiwa) | 2024, 2025 |
+| Kemiskinan | Persentase miskin, jumlah miskin, P1, P2, garis kemiskinan | Maret 2025 |
+| Pembangunan manusia | IPM (seri hasil LF SP2020) | 2024, 2025 |
+| Ketenagakerjaan | TPT Februari & Agustus, TPAK Februari & Agustus | 2025 |
+| Pendidikan | Rata-rata lama sekolah penduduk **usia 15+** | 2025 |
+| Kesehatan | Umur harapan hidup saat lahir menurut jenis kelamin | 2025 |
+| Ekonomi | PDRB harga berlaku | 2024, 2025 |
+| Ekonomi | PDRB per kapita harga berlaku | 2025 |
 
-## Sumber data
+Tahun hanya ditawarkan jika seri resmi tersedia dan telah dimasukkan ke katalog. Tabel dan peta menggunakan nilai yang sama; CSV menyertakan nama indikator, satuan, periode, dan URL sumber. Angka tertinggi/terendah dan median adalah **statistik antarprovinsi**, bukan statistik nasional.
 
-Dataset Maret 2025 berasal dari BPS yang disajikan ulang oleh Pusdatin Kementerian Pertanian, lalu disimpan sebagai snapshot CSV + JSON yang dapat diperiksa di `data/`.
+> **Perhatian metodologi:** Seri IPM menggunakan metodologi IPM dengan UHH berbasis Long Form SP2020. Data proyeksi penduduk bukan sensus baru, rata-rata lama sekolah usia 15+ bukan komponen RLS usia 25+ untuk IPM. PDRB nominal tidak menunjukkan pertumbuhan ekonomi riil. Nilai PDRB 2024 ditandai sementara (`*`), 2025 sangat sementara (`**`) menurut BPS.
 
-| Indikator | Tabel sumber |
-| --- | --- |
-| Persentase penduduk miskin (P0) | https://siperditan.pertanian.go.id/kemiskinan/persentase_bps.php |
-| Jumlah penduduk miskin | https://siperditan.pertanian.go.id/kemiskinan/kemiskinan_bps.php |
-| Indeks kedalaman kemiskinan (P1) | https://siperditan.pertanian.go.id/kemiskinan/indeks_kedalaman_bps.php |
-| Indeks keparahan kemiskinan (P2) | https://siperditan.pertanian.go.id/kemiskinan/indeks_keparahan_bps.php |
-| Garis kemiskinan | https://siperditan.pertanian.go.id/kemiskinan/garis_kemiskinan_bps.php |
+## Sumber
 
-**Konteks:** [BPS — Jumlah dan Persentase Penduduk Miskin Menurut Provinsi](https://www.bps.go.id/id/statistics-table/3/UkVkWGJVZFNWakl6VWxKVFQwWjVWeTlSZDNabVFUMDkjMw%3D%3D/jumlah-dan-persentase-penduduk-miskin-menurut-provinsi--2024.html?year=2025).
+Metadata lengkap ada di `data/catalog-2024-2025.json` (`source` per indikator) dan transkripsi setiap indikator ada di `scripts/build_catalog.py` (`SOURCE`). Tautan utama:
 
-Data tidak otomatis berubah mengikuti rilis BPS. Setiap pembaruan harus diverifikasi lebih dahulu. **Median dari 38 provinsi bukan angka nasional**. Angka jumlah miskin berbeda makna dari persentase miskin.
+- [BPS — Penduduk dan indikator demografi menurut provinsi](https://www.bps.go.id/id/statistics-table/3/V1ZSbFRUY3lTbFpEYTNsVWNGcDZjek53YkhsNFFUMDkjMw%3D%3D/penduduk-laju-pertumbuhan-penduduk-distribusi-persentase-penduduk-kepadatan-penduduk-rasio-jenis-kelamin-penduduk-menurut-provinsi.html?year=2025)
+- [BPS — Indeks Pembangunan Manusia](https://www.bps.go.id/id/statistics-table/3/V25GaFNHaExaMnhITm1sWmRrUlJZelJzYUc1SGR6MDkjMw%3D%3D/indeks-pembangunan-manusia-menurut-provinsi--2014.html)
+- [BPS — TPT dan TPAK per provinsi](https://www.bps.go.id/id/statistics-table/3/V2pOVWJWcHJURGg0U2pONFJYaExhVXB0TUhacVFUMDkjMw%3D%3D/tingkat-pengangguran-terbuka--tpt--dan-tingkat-partisipasi-angkatan-kerja--tpak--menurut-provinsi--2017.html)
+- [BPS — Rata-rata Lama Sekolah penduduk 15+](https://www.bps.go.id/id/statistics-table/2/MTQyOSMy/penerimaan-daerah-menurut-sumber.html)
+- [BPS — Umur Harapan Hidup menurut jenis kelamin](https://www.bps.go.id/id/statistics-table/2/MjI3MyMy/angka-harapan-hidup--ahh--menurut-provinsi-dan-jenis-kelamin--menggunakan-uhh-hasilsp2020lf-.html)
+- [BPS — PDRB atas dasar harga berlaku](https://www.bps.go.id/id/statistics-table/3/WkdVMWRYVnBkMnBvVEhKSVkyWXhNblZtTjJSbmR6MDkjMw%3D%3D/produk-domestik-regional-bruto-atas-dasar-harga-berlaku---menurut-provinsi--miliar-rupiah---2023.html)
+- [BPS — PDRB per kapita](https://www.bps.go.id/id/statistics-table/3/YWtoQlRVZzNiMU5qU1VOSlRFeFZiRTR4VDJOTVVUMDkjMw%3D%3D/produk-domestik-regional-bruto-per-kapita-atas-dasar-harga-berlaku-menurut-provinsi--ribu-rupiah---2018.html)
+- Dataset kemiskinan Maret 2025 dari BPS via [Pusdatin Kementan](https://siperditan.pertanian.go.id/kemiskinan/persentase_bps.php), beserta keterangan pada `data/poverty-2025.json`.
 
-## Sumber geometri
+GeoJSON provinsi berasal dari [denyherianto/indonesia-geojson-topojson-maps-with-38-provinces](https://github.com/denyherianto/indonesia-geojson-topojson-maps-with-38-provinces) (**CC BY 4.0**); atribusi lengkap di `data/GEODATA-LICENSE.md`. Geometri bukan dataset resmi BPS.
 
-Peta menggunakan `data/indonesia-38-provinces.geojson` dari proyek [Indonesia GeoJSON / TopoJSON — 38 Provinces](https://github.com/denyherianto/indonesia-geojson-topojson-maps-with-38-provinces) (lisensi **CC BY 4.0**, atribusi tambahan di `data/GEODATA-LICENSE.md`).
-
-Beberapa `KODE_PROV` untuk provinsi pemekaran Papua tidak unik, sehingga relasi ke data dibuat dari **nama provinsi yang dinormalisasi**. Batas dari proyek pihak ketiga belum tentu sama persis dengan versi administrasi yang dipakai BPS.
-
-**Mengapa renderer SVG sendiri?** Peta sebelumnya menggunakan `d3.geoMercator().fitExtent()` atas GeoJSON dengan exterior ring counterclockwise. D3 menafsirkan exterior tersebut sebagai komplemen permukaan bumi, sehingga Indonesia menjadi titik kecil. Renderer sekarang memproyeksikan pasangan `[longitude, latitude]` masing-masing ring ke viewBox 1000×445 (dan memakai `fill-rule="evenodd"`), tanpa asumsi arah ring. Rentang geografis dipakai untuk fit gambar ke viewport, kemudian SVG diskalakan dengan rasio tetap di mobile. Tidak ada permintaan peta ke server pihak ketiga saat runtime.
-
-## Jalankan lokal
+## Pengembangan lokal
 
 ```bash
-python -m http.server 8080
+python3 -m http.server 8000
+# kunjungi http://localhost:8000/
 ```
 
-Buka `http://localhost:8080/`. Jangan buka lewat `file://`, karena browser membatasi pemanggilan `fetch()` dari file lokal.
-
-## Pengujian
+Regenerasi data jika sumber BPS sudah diverifikasi ulang:
 
 ```bash
+python3 scripts/build_catalog.py
+python3 -m unittest discover -s tests
+python3 test_data.py
 node --check app.js
-python -m unittest test_data test_map_geometry
 ```
 
-`test_map_geometry.py` memastikan 38 nama cocok, koordinat masih di area Indonesia, dan proyeksi berada dalam viewBox.
+Jangan mengisi tahun baru dengan interpolasi, memperlakukan angka rupiah sebagai persen, atau menebak data provinsi. Pertahankan URL sumber asli, catatan metode, dan tanda revisi. `data/catalog-2024-2025.json` adalah **snapshot** yang disimpan di repository, bukan sinkronisasi WebAPI secara langsung. Kelompok tahun untuk setiap indikator dibangun dari seri yang tersedia; pergantian kategori tidak menampilkan angka dari indikator sebelumnya.
 
-## Deploy GitHub Pages
+## Deployment GitHub Pages
 
-Setelah PR digabung, masuk **Settings → Pages → Build and deployment → Deploy from a branch → main / (root)**. Semua path asset relatif sehingga aman untuk URL repo GitHub Pages.
+Settings → Pages → Build and deployment → Deploy from a branch → `main` / `(root)`.
 
-## Roadmap
+URL: https://ardwrd.github.io/Indonesia-visualized/
 
-- Tambahkan rentang tahun hanya setelah tiap tahun sumbernya terverifikasi.
-- Pilihan topik pendidikan, ekonomi, demografi, ketenagakerjaan, kesehatan.
-- Rincian kabupaten/kota setelah batas wilayah dan kode administratif seragam.
-- Pipeline pembaruan data dari BPS dengan verifikasi dan GitHub Actions (token API hanya lewat secrets).
-
-## Lisensi
-
-Kode situs menggunakan MIT (lihat `LICENSE`). Geometri peta dari kontributor pihak ketiga menggunakan CC BY 4.0 dan tidak otomatis menjadi MIT. Data statistik tetap diatribusikan ke BPS dan Pusdatin Kementerian Pertanian. Tidak ada afiliasi resmi dengan kedua instansi tersebut.
+Lisensi source code MIT; data geometri tetap mengikuti lisensi CC BY 4.0 milik penyedianya. Proyek ini tidak berafiliasi resmi dengan BPS.
