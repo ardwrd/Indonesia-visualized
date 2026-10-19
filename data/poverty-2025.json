@@ -1,0 +1,359 @@
+{
+  "title": "Indikator Kemiskinan Menurut Provinsi",
+  "year": 2025,
+  "period": "Maret 2025",
+  "coverage": "38 provinsi",
+  "notes": "Snapshot indikator kemiskinan Maret 2025; bukan data real-time. Angka jumlah penduduk miskin dinyatakan dalam ribu jiwa.",
+  "sources": {
+    "poverty_rate": "https://siperditan.pertanian.go.id/kemiskinan/persentase_bps.php",
+    "poor_population_thousand": "https://siperditan.pertanian.go.id/kemiskinan/kemiskinan_bps.php",
+    "poverty_gap": "https://siperditan.pertanian.go.id/kemiskinan/indeks_kedalaman_bps.php",
+    "poverty_severity": "https://siperditan.pertanian.go.id/kemiskinan/indeks_keparahan_bps.php",
+    "poverty_line": "https://siperditan.pertanian.go.id/kemiskinan/garis_kemiskinan_bps.php",
+    "bps_original": "https://www.bps.go.id/id/statistics-table/3/UkVkWGJVZFNWakl6VWxKVFQwWjVWeTlSZDNabVFUMDkjMw%3D%3D/jumlah-dan-persentase-penduduk-miskin-menurut-provinsi--2024.html?year=2025"
+  },
+  "provinces": [
+    {
+      "code": "11",
+      "name": "Aceh",
+      "poverty_rate": 12.33,
+      "poor_population_thousand": 704.69,
+      "poverty_gap": 1.84,
+      "poverty_severity": 0.42,
+      "poverty_line": 676247
+    },
+    {
+      "code": "12",
+      "name": "Sumatera Utara",
+      "poverty_rate": 7.36,
+      "poor_population_thousand": 1140.25,
+      "poverty_gap": 1.13,
+      "poverty_severity": 0.26,
+      "poverty_line": 666546
+    },
+    {
+      "code": "13",
+      "name": "Sumatera Barat",
+      "poverty_rate": 5.35,
+      "poor_population_thousand": 312.35,
+      "poverty_gap": 0.74,
+      "poverty_severity": 0.16,
+      "poverty_line": 729806
+    },
+    {
+      "code": "14",
+      "name": "Riau",
+      "poverty_rate": 6.16,
+      "poor_population_thousand": 460.96,
+      "poverty_gap": 0.87,
+      "poverty_severity": 0.2,
+      "poverty_line": 713117
+    },
+    {
+      "code": "15",
+      "name": "Jambi",
+      "poverty_rate": 7.19,
+      "poor_population_thousand": 270.94,
+      "poverty_gap": 0.98,
+      "poverty_severity": 0.2,
+      "poverty_line": 664127
+    },
+    {
+      "code": "16",
+      "name": "Sumatera Selatan",
+      "poverty_rate": 10.15,
+      "poor_population_thousand": 919.6,
+      "poverty_gap": 1.64,
+      "poverty_severity": 0.37,
+      "poverty_line": 581702
+    },
+    {
+      "code": "17",
+      "name": "Bengkulu",
+      "poverty_rate": 12.08,
+      "poor_population_thousand": 252.97,
+      "poverty_gap": 1.83,
+      "poverty_severity": 0.38,
+      "poverty_line": 683820
+    },
+    {
+      "code": "18",
+      "name": "Lampung",
+      "poverty_rate": 10.0,
+      "poor_population_thousand": 887.02,
+      "poverty_gap": 1.54,
+      "poverty_severity": 0.34,
+      "poverty_line": 612451
+    },
+    {
+      "code": "19",
+      "name": "Kepulauan Bangka Belitung",
+      "poverty_rate": 5.0,
+      "poor_population_thousand": 77.71,
+      "poverty_gap": 0.65,
+      "poverty_severity": 0.14,
+      "poverty_line": 956833
+    },
+    {
+      "code": "21",
+      "name": "Kepulauan Riau",
+      "poverty_rate": 4.44,
+      "poor_population_thousand": 117.28,
+      "poverty_gap": 0.69,
+      "poverty_severity": 0.18,
+      "poverty_line": 832410
+    },
+    {
+      "code": "31",
+      "name": "DKI Jakarta",
+      "poverty_rate": 4.28,
+      "poor_population_thousand": 464.87,
+      "poverty_gap": 0.57,
+      "poverty_severity": 0.11,
+      "poverty_line": 852768
+    },
+    {
+      "code": "32",
+      "name": "Jawa Barat",
+      "poverty_rate": 7.02,
+      "poor_population_thousand": 3654.74,
+      "poverty_gap": 1.17,
+      "poverty_severity": 0.29,
+      "poverty_line": 547752
+    },
+    {
+      "code": "33",
+      "name": "Jawa Tengah",
+      "poverty_rate": 9.48,
+      "poor_population_thousand": 3366.69,
+      "poverty_gap": 1.56,
+      "poverty_severity": 0.35,
+      "poverty_line": 537812
+    },
+    {
+      "code": "34",
+      "name": "DI Yogyakarta",
+      "poverty_rate": 10.23,
+      "poor_population_thousand": 425.82,
+      "poverty_gap": 1.59,
+      "poverty_severity": 0.34,
+      "poverty_line": 626363
+    },
+    {
+      "code": "35",
+      "name": "Jawa Timur",
+      "poverty_rate": 9.5,
+      "poor_population_thousand": 3875.88,
+      "poverty_gap": 1.41,
+      "poverty_severity": 0.29,
+      "poverty_line": 558029
+    },
+    {
+      "code": "36",
+      "name": "Banten",
+      "poverty_rate": 5.63,
+      "poor_population_thousand": 772.78,
+      "poverty_gap": 0.85,
+      "poverty_severity": 0.21,
+      "poverty_line": 684232
+    },
+    {
+      "code": "51",
+      "name": "Bali",
+      "poverty_rate": 3.72,
+      "poor_population_thousand": 173.24,
+      "poverty_gap": 0.56,
+      "poverty_severity": 0.12,
+      "poverty_line": 607847
+    },
+    {
+      "code": "52",
+      "name": "Nusa Tenggara Barat",
+      "poverty_rate": 11.78,
+      "poor_population_thousand": 654.57,
+      "poverty_gap": 1.76,
+      "poverty_severity": 0.36,
+      "poverty_line": 556846
+    },
+    {
+      "code": "53",
+      "name": "Nusa Tenggara Timur",
+      "poverty_rate": 18.6,
+      "poor_population_thousand": 1088.78,
+      "poverty_gap": 3.35,
+      "poverty_severity": 0.84,
+      "poverty_line": 549607
+    },
+    {
+      "code": "61",
+      "name": "Kalimantan Barat",
+      "poverty_rate": 6.16,
+      "poor_population_thousand": 330.95,
+      "poverty_gap": 0.86,
+      "poverty_severity": 0.18,
+      "poverty_line": 622882
+    },
+    {
+      "code": "62",
+      "name": "Kalimantan Tengah",
+      "poverty_rate": 5.19,
+      "poor_population_thousand": 147.8,
+      "poverty_gap": 0.83,
+      "poverty_severity": 0.19,
+      "poverty_line": 654066
+    },
+    {
+      "code": "63",
+      "name": "Kalimantan Selatan",
+      "poverty_rate": 3.84,
+      "poor_population_thousand": 172.72,
+      "poverty_gap": 0.47,
+      "poverty_severity": 0.1,
+      "poverty_line": 650675
+    },
+    {
+      "code": "64",
+      "name": "Kalimantan Timur",
+      "poverty_rate": 5.17,
+      "poor_population_thousand": 199.71,
+      "poverty_gap": 0.88,
+      "poverty_severity": 0.22,
+      "poverty_line": 866193
+    },
+    {
+      "code": "65",
+      "name": "Kalimantan Utara",
+      "poverty_rate": 5.54,
+      "poor_population_thousand": 42.57,
+      "poverty_gap": 0.75,
+      "poverty_severity": 0.29,
+      "poverty_line": 884970
+    },
+    {
+      "code": "71",
+      "name": "Sulawesi Utara",
+      "poverty_rate": 6.71,
+      "poor_population_thousand": 173.84,
+      "poverty_gap": 1.11,
+      "poverty_severity": 0.26,
+      "poverty_line": 530304
+    },
+    {
+      "code": "72",
+      "name": "Sulawesi Tengah",
+      "poverty_rate": 10.92,
+      "poor_population_thousand": 356.19,
+      "poverty_gap": 2.21,
+      "poverty_severity": 0.61,
+      "poverty_line": 624854
+    },
+    {
+      "code": "73",
+      "name": "Sulawesi Selatan",
+      "poverty_rate": 7.6,
+      "poor_population_thousand": 698.13,
+      "poverty_gap": 1.4,
+      "poverty_severity": 0.35,
+      "poverty_line": 477966
+    },
+    {
+      "code": "74",
+      "name": "Sulawesi Tenggara",
+      "poverty_rate": 10.54,
+      "poor_population_thousand": 304.43,
+      "poverty_gap": 1.89,
+      "poverty_severity": 0.45,
+      "poverty_line": 488171
+    },
+    {
+      "code": "75",
+      "name": "Gorontalo",
+      "poverty_rate": 13.24,
+      "poor_population_thousand": 162.74,
+      "poverty_gap": 1.96,
+      "poverty_severity": 0.44,
+      "poverty_line": 495576
+    },
+    {
+      "code": "76",
+      "name": "Sulawesi Barat",
+      "poverty_rate": 10.41,
+      "poor_population_thousand": 152.31,
+      "poverty_gap": 1.71,
+      "poverty_severity": 0.41,
+      "poverty_line": 475488
+    },
+    {
+      "code": "81",
+      "name": "Maluku",
+      "poverty_rate": 15.38,
+      "poor_population_thousand": 287.76,
+      "poverty_gap": 2.95,
+      "poverty_severity": 0.8,
+      "poverty_line": 757600
+    },
+    {
+      "code": "82",
+      "name": "Maluku Utara",
+      "poverty_rate": 5.81,
+      "poor_population_thousand": 77.27,
+      "poverty_gap": 0.95,
+      "poverty_severity": 0.22,
+      "poverty_line": 662397
+    },
+    {
+      "code": "91",
+      "name": "Papua Barat",
+      "poverty_rate": 20.66,
+      "poor_population_thousand": 106.9,
+      "poverty_gap": 4.17,
+      "poverty_severity": 1.18,
+      "poverty_line": 831001
+    },
+    {
+      "code": "92",
+      "name": "Papua Barat Daya",
+      "poverty_rate": 17.95,
+      "poor_population_thousand": 103.57,
+      "poverty_gap": 4.53,
+      "poverty_severity": 1.72,
+      "poverty_line": 812630
+    },
+    {
+      "code": "94",
+      "name": "Papua",
+      "poverty_rate": 19.16,
+      "poor_population_thousand": 171.38,
+      "poverty_gap": 4.58,
+      "poverty_severity": 1.49,
+      "poverty_line": 714365
+    },
+    {
+      "code": "95",
+      "name": "Papua Selatan",
+      "poverty_rate": 19.71,
+      "poor_population_thousand": 105.53,
+      "poverty_gap": 4.23,
+      "poverty_severity": 1.14,
+      "poverty_line": 566052
+    },
+    {
+      "code": "96",
+      "name": "Papua Tengah",
+      "poverty_rate": 28.9,
+      "poor_population_thousand": 302.31,
+      "poverty_gap": 5.58,
+      "poverty_severity": 1.52,
+      "poverty_line": 817834
+    },
+    {
+      "code": "97",
+      "name": "Papua Pegunungan",
+      "poverty_rate": 30.03,
+      "poor_population_thousand": 337.32,
+      "poverty_gap": 5.62,
+      "poverty_severity": 1.44,
+      "poverty_line": 1132178
+    }
+  ]
+}
