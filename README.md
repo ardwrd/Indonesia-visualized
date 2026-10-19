@@ -1,35 +1,40 @@
 # Indonesia Visualized
 
-> **Jelajahi Indonesia melalui data.** Aplikasi peta interaktif yang menyajikan statistik publik Indonesia secara sederhana, transparan, dan mudah dibandingkan.
+Visualisasi interaktif data statistik publik Indonesia. **Situs independen, bukan layanan resmi BPS.**
 
-**Live site (setelah GitHub Pages diaktifkan):** https://ardwrd.github.io/Indonesia-visualized/
+**GitHub Pages:** https://ardwrd.github.io/Indonesia-visualized/
 
-## MVP — Data kemiskinan BPS
+## Versi pertama: kemiskinan Maret 2025
 
-- Choropleth **38 provinsi**. Klik wilayah pada peta untuk melihat nilai indikator dan peringkat provinsinya.
-- **Lima indikator**: persentase penduduk miskin (P0), jumlah penduduk miskin (ribu jiwa), indeks kedalaman (P1), indeks keparahan (P2), dan garis kemiskinan (Rp/kapita/bulan).
-- Data snapshot **Maret 2025** (bukan live), dengan sumber dan definisi yang disebutkan secara eksplisit.
-- Ringkasan provinsi tertinggi/terendah dan **median antarprovinsi** (bukan statistik nasional), daftar peringkat, pencarian dan unduh CSV.
-- Vanilla JavaScript + D3.js, tanpa backend, login, analytics, maupun API key di frontend. Cocok untuk GitHub Pages.
+- Peta interaktif **38 provinsi**, bisa diklik/sentuh untuk menampilkan data wilayah, zoom in/out/reset, dan pan saat zoom.
+- Lima indikator: persentase penduduk miskin (P0), jumlah penduduk miskin (ribu jiwa), indeks kedalaman (P1), indeks keparahan (P2), dan garis kemiskinan (Rp/kapita/bulan).
+- Detail nilai dan peringkat provinsi, maksimum/minimum, median antarprovinsi, daftar peringkat, pencarian, dan ekspor CSV.
+- Mobile-first: peta tetap muat dalam layar HP, tersedia dropdown provinsi sebagai alternatif untuk pulau/provinsi kecil.
+- **Vanilla HTML/CSS/JavaScript tanpa framework, D3, Web API key, Google Fonts, analytics, atau backend.** Data dan GeoJSON di-host langsung dalam repo supaya render tidak bergantung pada CDN.
 
-## Asal data
+## Sumber data
 
-Data BPS disajikan ulang di situs Pusdatin Kementerian Pertanian, kemudian dibekukan sebagai snapshot CSV dan JSON dalam folder `data/` agar website stabil, transparan, dan tidak perlu meminta kunci API kepada pengunjung.
+Dataset Maret 2025 berasal dari BPS yang disajikan ulang oleh Pusdatin Kementerian Pertanian, lalu disimpan sebagai snapshot CSV + JSON yang dapat diperiksa di `data/`.
 
-| Indikator | Sumber | 
+| Indikator | Tabel sumber |
 | --- | --- |
 | Persentase penduduk miskin (P0) | https://siperditan.pertanian.go.id/kemiskinan/persentase_bps.php |
 | Jumlah penduduk miskin | https://siperditan.pertanian.go.id/kemiskinan/kemiskinan_bps.php |
 | Indeks kedalaman kemiskinan (P1) | https://siperditan.pertanian.go.id/kemiskinan/indeks_kedalaman_bps.php |
 | Indeks keparahan kemiskinan (P2) | https://siperditan.pertanian.go.id/kemiskinan/indeks_keparahan_bps.php |
 | Garis kemiskinan | https://siperditan.pertanian.go.id/kemiskinan/garis_kemiskinan_bps.php |
-| Tabel resmi BPS | https://www.bps.go.id/id/statistics-table/3/UkVkWGJVZFNWakl6VWxKVFQwWjVWeTlSZDNabVFUMDkjMw%3D%3D/jumlah-dan-persentase-penduduk-miskin-menurut-provinsi--2024.html?year=2025 |
 
-**Penting**: Sumber data adalah publikasi dan tabel pemerintah; repo ini bukan situs resmi BPS, dan nilai bisa direvisi oleh instansi sumber. Frekuensi rilis dan cakupan berbeda menurut indikator. Jangan menghitung angka kemiskinan nasional sebagai rata-rata sederhana 38 provinsi.
+**Konteks:** [BPS — Jumlah dan Persentase Penduduk Miskin Menurut Provinsi](https://www.bps.go.id/id/statistics-table/3/UkVkWGJVZFNWakl6VWxKVFQwWjVWeTlSZDNabVFUMDkjMw%3D%3D/jumlah-dan-persentase-penduduk-miskin-menurut-provinsi--2024.html?year=2025).
 
-## Geometri provinsi
+Data tidak otomatis berubah mengikuti rilis BPS. Setiap pembaruan harus diverifikasi lebih dahulu. **Median dari 38 provinsi bukan angka nasional**. Angka jumlah miskin berbeda makna dari persentase miskin.
 
-GeoJSON peta 38 provinsi tersimpan lokal di `data/indonesia-38-provinces.geojson` dan berasal dari proyek [Indonesia GeoJSON & TopoJSON 38 Provinces](https://github.com/denyherianto/indonesia-geojson-topojson-maps-with-38-provinces) (lisensi **CC BY 4.0**). UI mengutamakan geometri lokal, lalu memiliki fallback CDN dan GitHub raw. Versi yang disimpan di repo ini dibulatkan ke presisi lima angka desimal pada koordinat. Kode geometri beberapa provinsi Papua belum unik, jadi pencocokan menggunakan nama provinsi yang dinormalisasi. Layer geografis tersebut mungkin tidak identik dengan batas administrasi dalam rilis BPS.
+## Sumber geometri
+
+Peta menggunakan `data/indonesia-38-provinces.geojson` dari proyek [Indonesia GeoJSON / TopoJSON — 38 Provinces](https://github.com/denyherianto/indonesia-geojson-topojson-maps-with-38-provinces) (lisensi **CC BY 4.0**, atribusi tambahan di `data/GEODATA-LICENSE.md`).
+
+Beberapa `KODE_PROV` untuk provinsi pemekaran Papua tidak unik, sehingga relasi ke data dibuat dari **nama provinsi yang dinormalisasi**. Batas dari proyek pihak ketiga belum tentu sama persis dengan versi administrasi yang dipakai BPS.
+
+**Mengapa renderer SVG sendiri?** Peta sebelumnya menggunakan `d3.geoMercator().fitExtent()` atas GeoJSON dengan exterior ring counterclockwise. D3 menafsirkan exterior tersebut sebagai komplemen permukaan bumi, sehingga Indonesia menjadi titik kecil. Renderer sekarang memproyeksikan pasangan `[longitude, latitude]` masing-masing ring ke viewBox 1000×445 (dan memakai `fill-rule="evenodd"`), tanpa asumsi arah ring. Rentang geografis dipakai untuk fit gambar ke viewport, kemudian SVG diskalakan dengan rasio tetap di mobile. Tidak ada permintaan peta ke server pihak ketiga saat runtime.
 
 ## Jalankan lokal
 
@@ -37,36 +42,28 @@ GeoJSON peta 38 provinsi tersimpan lokal di `data/indonesia-38-provinces.geojson
 python -m http.server 8080
 ```
 
-Buka `http://localhost:8080/`. Jangan buka HTML via `file://` karena JSON memerlukan HTTP untuk `fetch()`.
+Buka `http://localhost:8080/`. Jangan buka lewat `file://`, karena browser membatasi pemanggilan `fetch()` dari file lokal.
+
+## Pengujian
+
+```bash
+node --check app.js
+python -m unittest test_data test_map_geometry
+```
+
+`test_map_geometry.py` memastikan 38 nama cocok, koordinat masih di area Indonesia, dan proyeksi berada dalam viewBox.
 
 ## Deploy GitHub Pages
 
-1. Merge pull request ke branch `main`.
-2. Buka **Settings → Pages → Build and deployment → Deploy from a branch**.
-3. Pilih branch `main` dan folder `/ (root)`, lalu **Save**.
-4. Lihat website di https://ardwrd.github.io/Indonesia-visualized/ setelah GitHub Pages menyelesaikan deployment.
-
-Seluruh URL asset menggunakan path relatif sehingga kompatibel dengan GitHub Pages project subpath. Internet tetap diperlukan untuk D3 dan Google Fonts. GeoJSON lokal dipakai untuk memperkecil ketergantungan CDN.
-
-## Quality check
-
-```bash
-python test_data.py
-node --check app.js
-```
-
-Script `make_data.py` meregenerasi snapshot 2025 dari tabel yang sudah ditranskripsi. Jangan gunakan angka baru sebelum cross-check ulang dengan sumbernya.
+Setelah PR digabung, masuk **Settings → Pages → Build and deployment → Deploy from a branch → main / (root)**. Semua path asset relatif sehingga aman untuk URL repo GitHub Pages.
 
 ## Roadmap
 
-- [x] Menghosting GeoJSON secara lokal agar peta tidak bergantung pada sumber eksternal.
-- [ ] Menyediakan multi-tahun hanya setelah tiap dataset diverifikasi dengan BPS.
-- [ ] Menambah kategori demografi, pendidikan, ekonomi, pekerjaan, kesehatan.
-- [ ] Menambah kabupaten/kota dengan sinkronisasi kode wilayah.
-- [ ] Menyiapkan pembaruan data terkontrol melalui GitHub Actions dan WebAPI BPS (API key hanya di GitHub Secrets, tidak di frontend).
+- Tambahkan rentang tahun hanya setelah tiap tahun sumbernya terverifikasi.
+- Pilihan topik pendidikan, ekonomi, demografi, ketenagakerjaan, kesehatan.
+- Rincian kabupaten/kota setelah batas wilayah dan kode administratif seragam.
+- Pipeline pembaruan data dari BPS dengan verifikasi dan GitHub Actions (token API hanya lewat secrets).
 
-## Lisensi dan atribusi
+## Lisensi
 
-Kode aplikasi mengikuti lisensi MIT di `LICENSE` repository. Dataset merupakan data publik yang tetap perlu atribusi BPS/Pusdatin dan sumber publikasi. **Geometri** pihak ketiga tunduk pada CC BY 4.0 dan harus tetap diberi kredit sebagaimana dicantumkan di atas.
-
-Proyek ini independen, terpisah dari PetaSuara dan bukan bagian dari layanan resmi BPS.
+Kode situs menggunakan MIT (lihat `LICENSE`). Geometri peta dari kontributor pihak ketiga menggunakan CC BY 4.0 dan tidak otomatis menjadi MIT. Data statistik tetap diatribusikan ke BPS dan Pusdatin Kementerian Pertanian. Tidak ada afiliasi resmi dengan kedua instansi tersebut.
