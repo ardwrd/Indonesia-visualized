@@ -64,3 +64,22 @@ Lisensi source code MIT; data geometri tetap mengikuti lisensi CC BY 4.0 milik p
 ### Penyajian satuan penduduk
 
 Peta, tooltip, tabel, ringkasan, dan detail wilayah menampilkan jumlah penduduk dalam **juta jiwa**, dibulatkan sampai dua desimal (nilai BPS dalam ribu jiwa dibagi 1.000). Dataset `data/catalog-2024-2025.json` serta berkas CSV unduhan tetap mempertahankan angka mentah **ribu jiwa** untuk ketertelusuran. Kolom `Satuan` pada CSV menandai unit tersebut.
+
+### Audit satuan dan keterbacaan (20 Oktober 2026)
+
+Nilai mentah statistik **tidak diubah**. Tampilan browser memakai konversi satuan berikut untuk memudahkan pembaca; ekspor CSV tetap membawa angka **dan satuan asli sumber**.
+
+| Indikator | Satuan asli | Satuan pada peta, tooltip, tabel, dan detail | Perubahan nilai |
+|---|---|---|---|
+| Jumlah penduduk | ribu jiwa | juta jiwa | ÷1.000 |
+| PDRB harga berlaku | miliar rupiah | triliun rupiah | ÷1.000 |
+| PDRB per kapita harga berlaku | ribu rupiah/kapita/tahun | juta rupiah/kapita/tahun | ÷1.000 |
+| Garis kemiskinan | rupiah/kapita/bulan | rupiah per kapita/bulan | Tetap; prefiks Rp pada nilai |
+| Jumlah penduduk miskin | ribu jiwa | ribu jiwa | Tetap |
+| Tingkat kemiskinan / TPT / TPAK | % | % | Tetap |
+| IPM / indeks kedalaman / indeks keparahan | indeks | indeks | Tetap |
+| Rata-rata lama sekolah / umur harapan hidup | tahun | tahun | Tetap |
+
+**Pemeriksaan lintas indikator:** 38 nilai PDRB ADHB 2025 dibandingkan dengan hasil PDRB per kapita × proyeksi penduduk 2025, konsisten dalam batas pembulatan data publik. Contoh DKI Jakarta: PDRB 3.926.153,30 miliar rupiah = 3.926,15 triliun rupiah, sedangkan PDRB per kapita 367.687 ribu rupiah = 367,69 juta rupiah/kapita/tahun.
+
+Ketika mengunduh CSV tahun 2024, kolom sumber memakai URL seri 2024 bila tersedia, bukan URL fallback 2025. Detail informasi asli tetap tersimpan di `data/catalog-2024-2025.json` dan `data/poverty-2025.json`.
