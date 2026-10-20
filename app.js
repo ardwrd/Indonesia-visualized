@@ -29,11 +29,11 @@
     const d=getDefinition(state.metric);
     return d?.periods?.[state.year]??null;
   }
-  function unit(){return getDefinition(state.metric)?.unit??'';}
+  function unit(){return state.metric==='population_total'?'juta jiwa':getDefinition(state.metric)?.unit??'';}
   function formatValue(value){
     if(!Number.isFinite(value))return '—';
     if(state.metric==='poverty_line')return 'Rp '+integer.format(value);
-    if(state.metric==='population_total')return decimalOne.format(value);
+    if(state.metric==='population_total')return number.format(value/1000);
     if(state.metric==='grdp_per_capita')return integer.format(value);
     if(state.metric==='grdp_current')return number.format(value);
     return number.format(value);
@@ -125,7 +125,7 @@
     $('map-subtitle').textContent=`${activePeriod()} · ${Object.keys(period.values).length} provinsi · ${state.catalog?.sources??'BPS'}`;
     $('detail-date').textContent=activePeriod();
     $('table-indicator').textContent=d.label;
-    $('metric-explanation').textContent=d.description;
+    $('metric-explanation').textContent=state.metric==='population_total'?'Data proyeksi jumlah penduduk ditampilkan dalam juta jiwa (dibagi 1.000 dari satuan asli BPS: ribu jiwa).':d.description;
     $('source-notes').textContent=d.notes||'';
     $('original-source').href=period.source??d.source;
     renderSummary();updateDetail();renderRanking();recolorMap();
