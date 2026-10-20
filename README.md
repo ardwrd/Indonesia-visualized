@@ -61,3 +61,6 @@ Settings → Pages → Build and deployment → Deploy from a branch → `main` 
 URL: https://ardwrd.github.io/Indonesia-visualized/
 
 Lisensi source code MIT; data geometri tetap mengikuti lisensi CC BY 4.0 milik penyedianya. Proyek ini tidak berafiliasi resmi dengan BPS.
+### Penyajian satuan penduduk
+
+Peta, tooltip, tabel, ringkasan, dan detail wilayah menampilkan jumlah penduduk dalam **juta jiwa**, dibulatkan sampai dua desimal (nilai BPS dalam ribu jiwa dibagi 1.000). Dataset `data/catalog-2024-2025.json` serta berkas CSV unduhan tetap mempertahankan angka mentah **ribu jiwa** untuk ketertelusuran. Kolom `Satuan` pada CSV menandai unit tersebut.
