@@ -29,13 +29,19 @@
     const d=getDefinition(state.metric);
     return d?.periods?.[state.year]??null;
   }
-  function unit(){return state.metric==='population_total'?'juta jiwa':getDefinition(state.metric)?.unit??'';}
+  function unit(){
+    const displayUnits={
+      population_total:'juta jiwa',
+      grdp_current:'triliun rupiah',
+      grdp_per_capita:'juta rupiah/kapita/tahun',
+      poverty_line:'per kapita/bulan'
+    };
+    return displayUnits[state.metric]??getDefinition(state.metric)?.unit??'';
+  }
   function formatValue(value){
     if(!Number.isFinite(value))return '—';
     if(state.metric==='poverty_line')return 'Rp '+integer.format(value);
-    if(state.metric==='population_total')return number.format(value/1000);
-    if(state.metric==='grdp_per_capita')return integer.format(value);
-    if(state.metric==='grdp_current')return number.format(value);
+    if(['population_total','grdp_current','grdp_per_capita'].includes(state.metric))return number.format(value/1000);
     return number.format(value);
   }
   function allRecords(){
@@ -122,9 +128,9 @@
   function repaint(){
     const d=getDefinition(state.metric),period=getSeries();
     $('map-title').textContent=d.label;
-    $('map-subtitle').textContent=`${activePeriod()} · ${Object.keys(period.values).length} provinsi · ${state.catalog?.sources??'BPS'}`;
+    $('map-subtitle').textContent=`${activePeriod()} · ${Object.keys(period.values).length} provinsi · Satuan: ${unit()} · ${state.catalog?.sources??'BPS'}`;
     $('detail-date').textContent=activePeriod();
-    $('table-indicator').textContent=d.label;
+    $('table-indicator').textContent=unit();
     $('metric-explanation').textContent=state.metric==='population_total'?'Data proyeksi jumlah penduduk ditampilkan dalam juta jiwa (dibagi 1.000 dari satuan asli BPS: ribu jiwa).':d.description;
     $('source-notes').textContent=d.notes||'';
     $('original-source').href=period.source??d.source;
@@ -251,7 +257,7 @@
   function downloadCsv(){
     const d=getDefinition(state.metric),period=getSeries();
     const columns=['Kode provinsi','Provinsi','Kategori','Indikator','Tahun','Periode','Nilai','Satuan','Sumber'];
-    const rows=[columns,...ranking().map(p=>[p.code,p.name,state.catalog.categories[state.category],d.label,state.year,period.label,p.value,d.unit,d.source])];
+    const rows=[columns,...ranking().map(p=>[p.code,p.name,state.catalog.categories[state.category],d.label,state.year,period.label,p.value,d.unit,period.source??d.source])];
     const csv='\ufeff'+rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');
     const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
     const a=document.createElement('a');a.href=url;a.download=`indonesia-visualized-${state.metric}-${state.year}.csv`;
